@@ -19,14 +19,14 @@
 
 
     <div class="row">
-        <div class="col-xl-12 col-md-12">
+        <div class="col-lg-6 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">Basic Info</h5>
                 </div>
                 <div class="card-body">
                     <div class="justify-content-center">
-                        <form method="post" class="w-50">
+                        <form method="post">
                             {% csrf_token %}
                             <div class="row mt-5">
                                 <div class="form-group">
@@ -47,6 +47,48 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Basic Info</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="/input_values">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5">
+                                    <input class="form-control" type="datetime-local" name="from_datetime" value="{{from_date}}" required>
+                                </div>
+                                <div class="col-md-5 col-sm-5">
+                                    <input class="form-control" type="datetime-local" name="to_datetime" value="{{to_date}}" required>
+                                </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <button class="btn btn-primary" type="submit">Get</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                    <div>
+                        {% if input_values %}
+                        {{ input_values }}
+                        {% endif %}
+
+<!--                        {% for key1,value1 in json.document.items %}-->
+<!--                            <div class="section">-->
+<!--                                <h4><a href="#" class="section_toggle"></a> {{ key1|title }}:</h4>-->
+<!--                                <table class="table table-condensed">-->
+<!--                                    {% for key2,value2 in value1.items %}-->
+<!--                                    {{ key2 }}-->
+<!--                                    {% endfor %}-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+                    </div>
                 </div>
             </div>
         </div>

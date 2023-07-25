@@ -88,27 +88,3 @@ def user_logout(request):
     logout(request)
     return redirect('login')
 
-
-def user_list(request):
-    context={}
-    user_list = User.objects.filter(email_confirmed=True)
-    context['user_list'] = user_list
-    return render(request, 'user/user_list.html', context)
-
-
-def user_permission(request, id):
-    context={}
-    user = User.objects.get(id=id)
-    form = Permissionform(instance = user)
-    context['form'] = form
-    if request.POST:
-        form = Permissionform(request.POST, instance = user)
-        if form.is_valid():
-            user_type = form.cleaned_data['user_type']
-            active = form.cleaned_data['active']
-            group = Group.objects.get(name=user_type)
-            group.user_set.add(user)
-            user.active = True
-            user.save()
-            return redirect('/accounts/user_list')
-    return render(request, 'user/user_permission.html', context)
